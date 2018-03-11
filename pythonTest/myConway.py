@@ -84,3 +84,30 @@ class Grid:
 				self.draw(i, j)
 		turtle.update()
 
+def display_instruction_window():
+	from turtle import TK
+	root = TK.TK()
+	frame = TK.Frame()
+	canvas = TK.Canvas(root, width=300, height=200, bg="white")
+	canvas.pack()
+	instr_screen = turtle.TurtleScreen(canvas)
+	instr_t = turtle.RawTurtle(instr_screen)
+	instr_t.penup()
+	instr_t.hideturtle()
+	instr_t.speed('fastest')
+
+	width, height = instr_screen.screensize()
+	line_height = 20
+	y = height // 2 - 30
+
+	for s in ("Click on cells to make them alive or dead.",
+              "Keyboard commands:",
+              " E)rase the board",
+              " R)andom fill",
+              " S)tep once or",
+              " C)ontinuously -- use 'S' to resume stepping",
+              " Q)uit"):
+        instr_t.setpos(-(width / 2), y)
+        instr_t.write(s, font=('sans-serif', 14, 'normal'))
+        y -= line_height
+
