@@ -1,9 +1,15 @@
 import turtle
 import sys
+import argparse
 from myConway import *
 
 def main():
-	turtle.screensize(canvwidth=400, canvheight=300)
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-width', type=int, help="enter the width of the grid in terms of the number of cells")
+	parser.add_argument('-height', type=int, help="enter the height of the grid in terms of the number of cells")
+	args = parser.parse_args()
+
+
 	scr = turtle.Screen()
 	turtle.mode('standard')
 	turtle.bgcolor('lightblue')
@@ -32,8 +38,14 @@ def main():
 			turtle.penup()
 			turtle.setpos(0, (i+1)*CELL_SIZE)
 
-	gridLines(400, 300)
 
+	try:
+		x = int(args.width)
+		y = int(args.height)
+	except:
+		raise ValueError('Grid dimensions are not of type int')
+
+	gridLines(y*CELL_SIZE, (x+1)*CELL_SIZE)
 	display_instruction_window(width, height)
 
 	turtle.hideturtle()
@@ -41,7 +53,7 @@ def main():
 	turtle.tracer(0, 0)
 	turtle.penup()
 
-	grid = Grid(width//CELL_SIZE, 1 + height//CELL_SIZE)
+	grid = Grid(x, 1 + y)
 
 	def toggle(x, y):
 		cell_x = x//CELL_SIZE
