@@ -3,12 +3,38 @@ import sys
 from myConway import *
 
 def main():
-	display_instruction_window()
-
+	turtle.screensize(canvwidth=400, canvheight=300)
 	scr = turtle.Screen()
 	turtle.mode('standard')
+	turtle.bgcolor('lightblue')
 	width, height = scr.screensize()
 	turtle.setworldcoordinates(0, 0, width, height)
+
+	turtle.speed(0)
+
+	def square(size):
+		turtle.color('grey')
+		turtle.setheading(0)
+		for i in range(5):
+			turtle.forward(size)
+			turtle.left(90)
+
+	def row(size):
+		r = size//CELL_SIZE
+		for i in range(r):
+			square(CELL_SIZE)
+
+	def gridLines(height, width):
+		r = height//CELL_SIZE
+		for i in range(r):
+			turtle.pendown()
+			row(width)
+			turtle.penup()
+			turtle.setpos(0, (i+1)*CELL_SIZE)
+
+	gridLines(400, 300)
+
+	display_instruction_window(width, height)
 
 	turtle.hideturtle()
 	turtle.speed('fastest')
@@ -18,11 +44,11 @@ def main():
 	grid = Grid(width//CELL_SIZE, 1 + height//CELL_SIZE)
 
 	def toggle(x, y):
-		cell_x = x/CELL_SIZE
-		cell_y = y/CELL_SIZE
-		if board.isValidMove(cell_x, cell_y):
-		    board.revCellState(cell_x, cell_y)
-		    board.drawGrid()
+		cell_x = x//CELL_SIZE
+		cell_y = y//CELL_SIZE
+		if grid.isValidMove(cell_x, cell_y):
+		    grid.revCellState(cell_x, cell_y)
+		    grid.drawGrid()
 
 	turtle.onscreenclick(turtle.listen)
 	turtle.onscreenclick(toggle)
