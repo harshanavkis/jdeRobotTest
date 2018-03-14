@@ -9,7 +9,7 @@ struct bfsProp
 	int x, y, dist;
 };
 
-int bfs(int, int);
+bfsProp bfs(int, int);
 bool isValid(int, int);
 std::vector<char> split(std::string);
 
@@ -20,21 +20,26 @@ int rows, cols;
 
 int main(int argc, char const *argv[])
 {
-	std::cin >> rows >> cols;
-	for(int i=0; i<rows; i++)
+	std::ifstream inFile;
+	int lineCount=0;
+	std::string currentLine;
+	int charCount;
+
+	inFile.open("test.txt");
+
+	while(std::getline(inFile, currentLine))
 	{
-		std::vector<char> v;
+		++lineCount;
+		std::vector<char> v = split(currentLine);
 		std::vector<bool> b;
-		for(int j=0; j<cols; j++)
-		{
-			char c;
-			std::cin >> c;
-			v.push_back(c);
+		for(int i=0; i<v.size(); i++)
 			b.push_back(false);
-		}
 		spaceMatrix.push_back(v);
 		visited.push_back(b);
 	}
+	inFile.close();
+	rows = lineCount;
+	cols = spaceMatrix[0].size();
 
 	bfsProp prevProp;
 	prevProp.dist = 0;
@@ -52,6 +57,7 @@ int main(int argc, char const *argv[])
 		}
 	}
 	std::cout << prevProp.dist << std::endl;
+	std::cout << prevProp.x << prevProp.y << std::endl;
 	return 0;
 }
 
@@ -103,6 +109,20 @@ bfsProp bfs(int i, int j)
 	return b;
 }
 
+std::vector<char> split(std::string line)
+{
+	std::vector<char> ch;
+	for(int i=0; i<line.length(); i++)
+	{
+		if(line.at(i) != '.' && line.at(i)!='#')
+		{
+			continue;
+		}
+		ch.push_back(line.at(i));
+	}
+	std::cout<<line<<std::endl;
+	return ch;
+}
 
 // 5 7                                                                                                                            
 // # # . # # # #                                                                                                                  
