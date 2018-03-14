@@ -38,5 +38,54 @@ config.rst
 /.project
 /.pydevproject
 
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @harshanavkis
+Sign out
+2,442
+62,828 28,616 github/gitignore
+ Code  Pull requests 160  Projects 0  Insights
+gitignore/C++.gitignore
+2c52d02  on Jun 29, 2016
+ pmartinez added prerequisites for C and C++
+@malleor @peterfpeterson @rhysd @jlokimlin @bnoordhuis @d2s @mrtazz @starrify
+     
+33 lines (26 sloc)  270 Bytes
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
 *.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
 *.exe
+*.out
+*.app
+
