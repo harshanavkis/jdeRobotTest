@@ -46,10 +46,10 @@ int main(int argc, char const *argv[])
 			}
 		}
 	}
-	std::cout<< rows << cols <<std::endl;
+// 	std::cout<< rows << cols <<std::endl;
 
-	std::cout << prevProp.dist << std::endl;
-	std::cout << prevProp.x << " " << prevProp.y << std::endl;
+// 	std::cout << prevProp.dist << std::endl;
+// 	std::cout << prevProp.x << " " << prevProp.y << std::endl;
 
 	visited = tempVisit;
 
@@ -58,20 +58,20 @@ int main(int argc, char const *argv[])
 	if(!outFile)
 	{
 		std::cerr << "Error: file could not be opened" << std::endl;
-      	exit(1);
+      		return 0;
 	}
 	outFile<<prevProp.dist<<'\n';
 
 	bfsChangeVals(prevProp.x, prevProp.y);
 
-	for(int i=0; i<rows; i++)
-	{
-		for(int j=0; j<cols; j++)
-		{
-			std::cout<<spaceMatrix[i][j] << " ";
-		}
-		std::cout<<std::endl;
-	}
+// 	for(int i=0; i<rows; i++)
+// 	{
+// 		for(int j=0; j<cols; j++)
+// 		{
+// 			std::cout<<spaceMatrix[i][j] << " ";
+// 		}
+// 		std::cout<<std::endl;
+// 	}
 
 	for(int i=0; i<rows; i++)
 	{
