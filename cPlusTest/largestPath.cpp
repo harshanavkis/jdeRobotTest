@@ -18,6 +18,7 @@ bfsProp bfs(int, int);
 bool isValid(int, int);
 std::vector<char> split(std::string);
 void bfsChangeVals(int, int);
+// std::string join(std::vector<char>);
 
 std::vector<std::vector<bool> > visited;
 std::vector<std::vector<char> > spaceMatrix;
@@ -78,6 +79,25 @@ int main(int argc, char const *argv[])
 		}
 		std::cout<<std::endl;
 	}
+
+	std::ofstream outFile;
+	outFile.open("test.txt");
+	if(!outFile)
+	{
+		std::cerr << "Error: file could not be opened" << std::endl;
+      	exit(1);
+	}
+	outFile<<prevProp.dist<<'\n';
+	for(int i=0; i<rows; i++)
+	{
+		for(int j=0; j<cols; j++)
+		{
+			outFile<<spaceMatrix[i][j];
+		}
+		outFile<<'\n';
+	}
+	outFile.close();
+
 
 	return 0;
 }
@@ -178,6 +198,11 @@ void bfsChangeVals(int i, int j)
 		}
 	}
 }
+
+// std::string join(std::vector<char> c)
+// {
+
+// }
 
 // 5 7                                                                                                                            
 // # # . # # # #                                                                                                                  
