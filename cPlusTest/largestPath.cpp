@@ -9,9 +9,15 @@ struct bfsProp
 	int x, y, dist;
 };
 
+struct coord
+{
+	int x, y;
+};
+
 bfsProp bfs(int, int);
 bool isValid(int, int);
 std::vector<char> split(std::string);
+void bfsChangeVals(int, int);
 
 std::vector<std::vector<bool> > visited;
 std::vector<std::vector<char> > spaceMatrix;
@@ -37,6 +43,8 @@ int main(int argc, char const *argv[])
 		spaceMatrix.push_back(v);
 		visited.push_back(b);
 	}
+
+	std::vector<std::vector<bool> > tempVisit = visited;
 	inFile.close();
 	rows = lineCount;
 	cols = spaceMatrix[0].size();
@@ -57,7 +65,20 @@ int main(int argc, char const *argv[])
 		}
 	}
 	std::cout << prevProp.dist << std::endl;
-	std::cout << prevProp.x << prevProp.y << std::endl;
+	std::cout << prevProp.x << " " << prevProp.y << std::endl;
+
+	visited = tempVisit;
+	bfsChangeVals(prevProp.x, prevProp.y);
+
+	for(int i=0; i<rows; i++)
+	{
+		for(int j=0; j<cols; j++)
+		{
+			std::cout<<spaceMatrix[i][j] << " ";
+		}
+		std::cout<<std::endl;
+	}
+
 	return 0;
 }
 
@@ -122,6 +143,40 @@ std::vector<char> split(std::string line)
 	}
 	std::cout<<line<<std::endl;
 	return ch;
+}
+
+void bfsChangeVals(int i, int j)
+{
+	std::queue<int> x, y;
+	int topx, topy, dist=0;
+	spaceMatrix[i][j] = char(48);
+
+	x.push(i);
+	y.push(j);
+
+	while(!x.empty())
+	{
+		topx = x.front();
+		topy = y.front();
+		x.pop();
+		y.pop();
+
+		for(int d=0; d<4; d++)
+		{
+			i = topx + gr[d];
+			j = topy + gc[d];
+			if(!isValid(i, j))
+				continue;
+			if(!visited[i][j] && spaceMatrix[i][j]=='.')
+			{
+				visited[i][j] = true;
+				spaceMatrix[i][j] = char(48+dist+1);
+				dist++;
+				x.push(i);
+				y.push(j);
+			}
+		}
+	}
 }
 
 // 5 7                                                                                                                            
