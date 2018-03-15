@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
 	std::string currentLine;
 	int charCount;
 
-	inFile.open("test.txt");
+	inFile.open(argv[1]);
 
 	while(std::getline(inFile, currentLine))
 	{
@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
 	visited = tempVisit;
 
 	std::ofstream outFile;
-	outFile.open("test.txt");
+	outFile.open(argv[1]);
 	if(!outFile)
 	{
 		std::cerr << "Error: file could not be opened" << std::endl;
